@@ -21,9 +21,10 @@ io.on('connect', (socket) => {
 
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
 
-    socket.on('createMessage', (message) => {
+    socket.on('createMessage', (message, cb) => {
         console.log('New message created: ', message);
         io.emit('newMessage', generateMessage(message.from, message.text));
+        cb('This is acknowledge from server');
     });
 
     socket.on('disconnect', () => {
