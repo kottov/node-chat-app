@@ -55,5 +55,5 @@ locationButton.on('click', function() {
         
     }, function() {
         alert('Unable to fetch location');
-    })
+    });
 });
