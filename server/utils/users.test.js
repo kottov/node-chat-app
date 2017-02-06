@@ -61,5 +61,10 @@ describe('Users', () => {
         var userList = users.getUserList(users.users[1].room);
 
         expect(userList).toEqual([users.users[1].name]);
-    }); 
+    });
+
+    it('should get existing rooms list', () => {
+        var rooms = users.getRoomsList();
+        expect(rooms.length).toBe(2);
+    });
 });
