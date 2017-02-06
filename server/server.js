@@ -22,12 +22,13 @@ io.on('connect', (socket) => {
         if(!isRealString(params.name) || !isRealString(params.room)) {
             cb('Name and room name are required');
         }
+        socket.join(params.room);
+
+        socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat'));
+        socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined`));
+
         cb();
     });
-
-    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat'));
-
-    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
 
     socket.on('createMessage', (message, cb) => {
         console.log('New message created: ', message);

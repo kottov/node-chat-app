@@ -14,6 +14,6 @@ describe('isRealString', () => {
     });
 
     it('should allow strings with non-space characters', () => {
-        expect(isRealString(' h ')).toBeFalsy();
+        expect(isRealString(' h ')).toBeTruthy();
     });
 });
