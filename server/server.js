@@ -17,12 +17,19 @@ const port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, '../public')));
 
+app.get('/rooms', (req, res) => {
+    res.send(users.getRoomsList());
+});
+
 io.on('connect', (socket) => {
     console.log('New user connected');
 
     socket.on('join', (params, cb) => {
         if(!isRealString(params.name) || !isRealString(params.room)) {
             cb('Name and room name are required');
+        }
+        if(users.getUserList(params.room).indexOf(params.name) !== -1) {
+            cb('Name already occupied');
         }
         socket.join(params.room);
         users.removeUser(socket.id);

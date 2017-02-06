@@ -19,6 +19,9 @@ class Users {
             .filter((user) => user.room === room)
             .map((user) => user.name);
     }
+    getRoomsList () {
+        return [...new Set(this.users.map((user) => user.room))];
+    }
 }
 
 module.exports = { Users };
